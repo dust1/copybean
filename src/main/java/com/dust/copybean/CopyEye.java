@@ -37,7 +37,7 @@ public class CopyEye extends Configured implements Eye {
     public void copy(Object source, Object target,
                             Class sourceClass, Class targetClass) {
         if (!checkConfig()) {
-            setConfig(Configuration.DEFAUL_CONFIG);
+            setConfig(Configuration.DEFAULT_CONFIG);
         }
 
         Field[] sourceFields = sourceClass.getDeclaredFields();

@@ -24,7 +24,7 @@ public abstract class Configuration {
     /**
      * 默认的配置
      */
-    public static final Configuration DEFAUL_CONFIG = new Configuration() {
+    public static final Configuration DEFAULT_CONFIG = new Configuration() {
         @Override
         String toTargetField(String sourceFieldName) {
             return sourceFieldName;

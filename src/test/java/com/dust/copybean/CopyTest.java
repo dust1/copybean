@@ -10,7 +10,13 @@ import com.dust.copybean.entity.TargetA;
 public class CopyTest {
 
     public static void main(String[] args) {
-        normalCopy();
+//        normalCopy();
+//        System.out.println('z' - 'A');
+        WordTree wordTree = new WordTree();
+        wordTree.append("hello");
+        wordTree.append("world");
+        wordTree.append("how");
+        System.out.println(wordTree);
     }
 
     private static void normalCopy() {
