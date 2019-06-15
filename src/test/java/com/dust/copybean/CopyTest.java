@@ -12,11 +12,14 @@ public class CopyTest {
     public static void main(String[] args) {
 //        normalCopy();
 //        System.out.println('z' - 'A');
-        WordTree wordTree = new WordTree();
-        wordTree.append("hello");
-        wordTree.append("world");
-        wordTree.append("how");
-        System.out.println(wordTree);
+//        WordTree wordTree = new WordTree();
+//        wordTree.append("hello");
+//        wordTree.append("world");
+//        wordTree.append("how");
+//        System.out.println(wordTree);
+        String str = "hello";
+        String skip = "he";
+        System.out.println(str.substring(skip.length()));
     }
 
     private static void normalCopy() {
