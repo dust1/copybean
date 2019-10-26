@@ -3,6 +3,8 @@ package com.dust.copybean;
 import com.dust.copybean.entity.SourceA;
 import com.dust.copybean.entity.TargetA;
 
+import java.util.HashMap;
+
 
 /**
  * 复制测试

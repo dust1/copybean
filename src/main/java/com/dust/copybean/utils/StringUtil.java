@@ -1,4 +1,4 @@
-package com.dust.copybean;
+package com.dust.copybean.utils;
 
 import java.util.Locale;
 

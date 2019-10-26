@@ -1,4 +1,4 @@
-package com.dust.copybean;
+package com.dust.copybean.utils;
 
 /**
  * 单词树
@@ -31,6 +31,7 @@ public class WordTree {
             this.isWord = true;
             return;
         }
+
         char chars = word.charAt(index);
         if (Character.isUpperCase(chars) ||         //是否是大写字母
                 Character.isLowerCase(chars)) {     //是否是小写字母
