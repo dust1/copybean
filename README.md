@@ -1,59 +1,60 @@
 # CopyBean
 一个简单的对JavaBean当中字段的值进行复制的工具。
 
-## 直接复制
-该方法直接对两个JavaBean之间相同名称、相同类型的字段的值进行复制。使用方法如下：
+当前可以复制的变量类型：
+
+1. 基本数据类型以及String类
+2. 数组
+3. Collection、Map和他们的子类
+
+## 如何使用
+
+首先您需要创建复制相关的配置Configuration:<br>
+在当前工具中，您必须指定源类型与目标类型，同时可以指定对应的参数映射
 ```java
+
 class Test {
     
-   /**
-    * source - 源对象
-    * target - 目标对象
-    * Source.class - 源对象的类型
-    * Target.class - 目标对象的类型
-    */
-    public void test() {
-        CopyEye eye = new CopyEye();
-        eye.copy(source, targetA,
-            Source.class, Target.class);
+    //简单的创建配置
+    public Configuration getConf(Class<?> sourceType, Class<?> targetType) {
+        return Configuration.of(sourceType, targetType);
+    }
+    
+    //当然您也可以指定变量名之间的映射规则
+    public Configuration getConf(Class<?> sourceType, Class<?> targetType,
+           Function<String, String> router) {
+        return Configuration.of(sourceType, targetType, router);
     }
     
 }
 ```
-## 自定义规则
-你也可以通过继承Configuration抽象类来实现自己的字段映射规则。<br>
-⚠️:当前的配置规则只是适用于source。<br>
-相当于source的字段名称在对target查询时要先经过toTargetField(sourceFieldName:String)的转换。
-```java
 
-class MyConfig extends Configuration {
+对应映射规则您可以编写您自己的Function<String, String>函数，虽然大部分时候都用不到。
+
+当您获取了Configuration对象后就可以创建复制类了：
+```java
+class Test {
     
-    private String skip;
-    
-    public MyConfig(String skip) {
-        this.skip = skip;
-    }
-    
-   /**
-    * 如果存在前缀，则忽略
-    */
-    public String toTargetField(String sourceFieldName) {
-        return sourceFieldName.startsWith(skip)
-            ? sourceFieldName.substring(skip.length())
-            : sourceFieldName;
+    public Copy getCopy(Configuration configuration) {
+        return Copy.getInstance(configuration);
     }
     
 }
+```
+
+使用也是非常的简单，Copy对外只有一个开放的方法，那就是"复制"。
+```java
 
 class Test {
-    public void test() {
-        CopyEye eye = new CopyEye();
-        MyConfig config = new MyConfig("is");
-        eye.setConfig(eye);
-        /*
-          调用复制方法
-         */
+    
+    private Copy copy;
+    
+    //就是如此的简单
+    public void copy(Object source, Object target) {
+        copy.copy(source, target);
     }
 }
 
 ```
+
+您可以将初始化完成的Copy对象放置在任何地方以供您重复使用.

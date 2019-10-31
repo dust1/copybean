@@ -2,11 +2,19 @@ package com.dust.copybean.entity;
 
 import lombok.Data;
 
+import java.util.List;
+import java.util.Map;
+
 @Data
 public class SourceA {
 
-    private Integer id;
+    private int id;
     private String username;
-    private Double amount;
+    private double amount;
 
+    private List<Integer> list;
+
+    private int[] nums;
+
+    private Map<String, String> map;
 }
