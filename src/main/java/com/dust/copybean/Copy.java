@@ -51,6 +51,9 @@ public class Copy implements Behavior {
             if (Objects.isNull(field)) {
                 continue;
             }
+            if (!sourceField.getClass().equals(field.getClass())) {
+                continue;
+            }
             field.setAccessible(true);
 
             try {
