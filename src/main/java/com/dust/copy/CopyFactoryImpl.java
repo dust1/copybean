@@ -1,7 +1,6 @@
 package com.dust.copy;
 
 import com.dust.annotation.CopyTag;
-import com.dust.copybean.strategy.CopyFieldHandler;
 import com.dust.fields.FieldHandler;
 import com.dust.util.ClassUtil;
 
