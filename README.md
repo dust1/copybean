@@ -6,6 +6,9 @@
 1. 基本数据类型以及String类
 2. 基本数据类型以及String类组成的数组
 
+要求：
+类型必须相同
+
 ## 如何使用
 
 该工具十分方便使用，下面是一个简单的例子,@Data使用的是lombok插件
@@ -67,3 +70,18 @@ public class Test {
 
 ```
 你可以将Copy保存起来随时复用
+
+## 注解
+有时候你可能想将相同类型，不同命名的变量进行复制，这时候你可以使用CopyTag注解
+```java
+
+class TestObject {
+    
+    @CopyTag(target = "newName")
+    private String name;
+}
+
+```
+注意：该注解只能标注在原数据的变量中。
+
+这样复制处理器会在读取的时候自动采用你设置的变量名而不是默认相同名称
