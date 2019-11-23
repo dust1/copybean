@@ -4,57 +4,66 @@
 当前可以复制的变量类型：
 
 1. 基本数据类型以及String类
-2. 数组
-3. Collection、Map和他们的子类
+2. 基本数据类型以及String类组成的数组
 
 ## 如何使用
 
-首先您需要创建复制相关的配置Configuration:<br>
-在当前工具中，您必须指定源类型与目标类型，同时可以指定对应的参数映射
+该工具十分方便使用，下面是一个简单的例子,@Data使用的是lombok插件
 ```java
 
-class Test {
-    
-    //简单的创建配置
-    public Configuration getConf(Class<?> sourceType, Class<?> targetType) {
-        return Configuration.of(sourceType, targetType);
-    }
-    
-    //当然您也可以指定变量名之间的映射规则
-    public Configuration getConf(Class<?> sourceType, Class<?> targetType,
-           Function<String, String> router) {
-        return Configuration.of(sourceType, targetType, router);
-    }
-    
-}
-```
+@Data
+public class SourceA {
 
-对应映射规则您可以编写您自己的Function<String, String>函数，虽然大部分时候都用不到。
+    private int id;
+    private String username;
+    private double amount;
+    private int[] nums;
 
-当您获取了Configuration对象后就可以创建复制类了：
-```java
-class Test {
-    
-    public Copy getCopy(Configuration configuration) {
-        return Copy.getInstance(configuration);
-    }
-    
-}
-```
-
-使用也是非常的简单，Copy对外只有一个开放的方法，那就是"复制"。
-```java
-
-class Test {
-    
-    private Copy copy;
-    
-    //就是如此的简单
-    public void copy(Object source, Object target) {
-        copy.copy(source, target);
-    }
 }
 
-```
+@Data
+public class TargetA {
 
-您可以将初始化完成的Copy对象放置在任何地方以供您重复使用.
+    private int id;
+
+    private String username;
+
+    private double amount;
+
+    private int[] nums;
+}
+
+public class Test {
+
+    public static void main(String[] args) {
+        SourceA sourceA = getSource();
+        TargetA targetA = getTarget();
+
+        Copy copy = Copy.create();
+        copy.copy(sourceA, targetA);
+
+        System.out.println(sourceA.toString());
+        System.out.println(targetA.toString());
+    }
+
+    private static SourceA getSource() {
+        SourceA source = new SourceA();
+        source.setAmount(1.2);
+        source.setId(1);
+        source.setUsername("admin");
+        source.setNums(new int[] {1, 2, 3, 4});
+        return source;
+    }
+
+    private static TargetA getTarget() {
+        return new TargetA();
+    }
+
+}
+
+//out
+//SourceA(id=1, username=admin, amount=1.2, nums=[1, 2, 3, 4])
+//TargetA(id=1, username=admin, amount=1.2, nums=[1, 2, 3, 4])
+
+```
+你可以将Copy保存起来随时复用

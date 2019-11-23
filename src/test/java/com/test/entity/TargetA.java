@@ -1,4 +1,4 @@
-package com.dust.copybean.entity;
+package com.test.entity;
 
 import lombok.Data;
 

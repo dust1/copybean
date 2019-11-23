@@ -1,4 +1,4 @@
-package com.dust.copybean.entity;
+package com.test.entity;
 
 import lombok.Data;
 
@@ -11,10 +11,6 @@ public class SourceA {
     private int id;
     private String username;
     private double amount;
-
-    private List<Integer> list;
-
     private int[] nums;
 
-    private Map<String, String> map;
 }
